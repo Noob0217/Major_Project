@@ -30,4 +30,13 @@ const AgencyTypes = {
   GET_ALL_AGENCIES_FAILURE: "AGENCY_GET_ALL_AGENCIES_FAILURE",
 };
 
+// action_types.js
+
+export const ResourceTypes = {
+  GET_ALL_RESOURCES_REQUEST: "GET_ALL_RESOURCES_REQUEST",
+  GET_ALL_RESOURCES_SUCCESS: "GET_ALL_RESOURCES_SUCCESS",
+  GET_ALL_RESOURCES_FAILURE: "GET_ALL_RESOURCES_FAILURE",
+};
+
+
 export { AuthTypes, ProfileTypes, AgencyTypes };

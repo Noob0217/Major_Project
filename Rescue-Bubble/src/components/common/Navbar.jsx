@@ -10,7 +10,6 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Dispatch the logout action
     dispatch(authLogout());
     navigate('/');
   };
@@ -19,20 +18,16 @@ const Navbar = () => {
     { id: 1, name: "Resources", link: "/resources" },
     { id: 2, name: "Disasters", link: "/disasters" },
     { id: 3, name: "Agencies", link: "/agencies" },
-    // { id: 4, name: "About Us", link: "/about" },
     { id: 5, name: "Contact Us", link: "/contact" },
     { id: 6, name: "Alerts", link: "/alert" },
   ];
 
   return (
     <nav className="w-full z-10 relative bg-gray-800 h-20 flex items-center justify-center shadow-lg">
-      <div className="w-11/12  flex flex-row items-center justify-between">
+      <div className="w-11/12 flex flex-row items-center justify-between">
         {/* left part with name and logo */}
         <div className="flex flex-row items-center justify-center gap-2">
-          <Link
-            className="flex flex-row items-center justify-center gap-2"
-            to="/"
-          >
+          <Link className="flex flex-row items-center justify-center gap-2" to="/">
             <img src={logo} alt="logo" width="45px" className="hidden md:block" />
             <p className="md:text-2xl sm:text-xl text-white font-Roberto font-bold">
               ResQbubble
@@ -41,24 +36,27 @@ const Navbar = () => {
         </div>
 
         {/* mid part with links */}
-        <div className="hidden md:block">
-          <ul className="flex items-center justify-center gap-6">
-            {Links.map((link) => (
-              <li key={link.id}>
-                <Link
-                  to={link.link}
-                  className="text-white font-bold font-Roborto hover:text-indigo-500 duration-200"
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className="hidden md:flex items-center gap-6">
+          {Links.map((link) => (
+            <Link
+              key={link.id}
+              to={link.link}
+              className="text-white font-bold font-Roborto hover:text-indigo-500 duration-200"
+            >
+              {link.name}
+            </Link>
+          ))}
+
+          {/* Red Borrow Button */}
+          <Link to="/borrow-resources">
+          <button className="bg-red-500 hover:bg-red-600 text-white font-bold rounded-full px-4 py-2 duration-300 shadow-md">
+              Borrow Resources
+            </button>
+          </Link>
         </div>
 
         {/* right part with login and logout buttons */}
         <div className="flex flex-row items-center justify-center gap-4">
-          {/* Signup button */}
           {!state.isLoggedin && (
             <NavLink to="/signup">
               <button className="bg-indigo-500 hover:bg-indigo-600 hover:scale-95 block font-bold text-white shadow-sm rounded-full px-4 py-2 duration-300 w-24">
@@ -67,18 +65,16 @@ const Navbar = () => {
             </NavLink>
           )}
 
-          {/* Profile button */}
-          {
-            state.isLoggedin && <div>
+          {state.isLoggedin && (
+            <div>
               <NavLink to="/profile" className="nav-link">
                 <button className="bg-indigo-500 hover:bg-indigo-600 hover:scale-95 block font-bold text-white shadow-sm rounded-full px-4 py-2 duration-300 w-24">
                   Profile
                 </button>
               </NavLink>
             </div>
-          }
+          )}
 
-          {/* Login and Logout Button */}
           <div>
             {state.isLoggedin ? (
               <button
@@ -95,7 +91,6 @@ const Navbar = () => {
               </NavLink>
             )}
           </div>
-
         </div>
       </div>
     </nav>

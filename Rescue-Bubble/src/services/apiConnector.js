@@ -7,19 +7,12 @@ const apiConnector = async function ({
   method = "get", // HTTP request method (default is GET)
   url, // URL for the API endpoint
   body = null, // Request body data (default is null)
-  headers = null, // Custom headers for the request (default is null)
+  headers = {}, // Custom headers for the request (default is an empty object)
 }) {
   // Check if a JWT token is stored in sessionStorage and set it as a default header
-  if (sessionStorage.getItem("_token")) {
-    if (headers) {
-      headers += {
-        Authorization: sessionStorage.getItem("_token"),
-      };
-    } else {
-      headers = {
-        Authorization: sessionStorage.getItem("_token"),
-      };
-    }
+  const token = sessionStorage.getItem("_token");
+  if (token) {
+    headers.Authorization = token; // Add Authorization header
   }
 
   try {

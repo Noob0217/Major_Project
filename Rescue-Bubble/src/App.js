@@ -24,7 +24,9 @@ import Alert from "./pages/Alert";
 import CreateAlert from "./components/CreateAlert";
 import UpdateResource from "./pages/UpdateResource";
 import ResourceDetails from "./components/ResourceDetails";
-import ChatWrapper from "./pages/ChatWrapper"; // ✅ updated import
+import ChatWrapper from "./pages/ChatWrapper";
+import BorrowResources from "./pages/borrowresource"; // 🛠️ Correct import
+import AllAgencyResources from "./pages/AllAgencyResources"; // 🛠️ Correct import
 
 function PrivateRoute({ children }) {
   const isAuthenticated = useSelector((state) => state.auth.isLoggedin);
@@ -96,6 +98,17 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/updateResource/:resourceId" element={<UpdateResource />} />
         <Route path="/resource/:resourceId" element={<ResourceDetails />} />
+        
+        {/* ✅ Borrow Resources Page Route */}
+        <Route
+          path="/borrow-resources"
+          element={
+            <PrivateRoute>
+              <BorrowResources />
+            </PrivateRoute>
+          }
+        />
+
         <Route
           path="/chat/:agencyId"
           element={
@@ -160,6 +173,16 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/all-resources" element={<AllAgencyResources />} />
+        <Route
+          path="/resource-details/:resourceId"
+          element={
+            <PrivateRoute>
+              <ResourceDetails />
+            </PrivateRoute>
+          }
+          />
+
       </Routes>
     </div>
   );
